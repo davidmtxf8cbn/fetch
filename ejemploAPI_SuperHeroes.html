@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Superheroes</title>
+
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        h1{
+            background: #F5C2C1;
+            color: purple;
+            text-align: center;
+            padding: 0.7em 0em;
+        }
+
+        p{
+            text-align: center;
+        }
+
+        .alcentro{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        #respuesta{
+            background: #F7F6DB;
+            border: 1px solid #86A9C2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+            <h1>Super Heroes</h1>
+
+            <form action="#">
+                <!--<p>
+                       <label for="superhero">por favor digite un codigo de super heroe</label>
+                       <input type="text" name="superhero" id="superhero">
+                </p> > -->
+
+                <div class="form-group">
+                        <label for="superhero">Digita un codigo de super heroe</label>
+                        <input type="text" class="form-control" id="superhero"  placeholder="Digita un codigo entre 1 y 731">
+                        <small class="form-text text-muted">Busca tu favorito</small>
+                </div>
+                <p>
+                  <!--  <input type="submit" value="Enviar" id="bt_enviar"> -->
+                    <button type="submit" class="btn btn-primary"  id="bt_enviar">Consultar</button>
+                </p>
+                
+       
+            </form>
+       
+            <div id="respuesta">
+       
+       
+            </div>
+            
+    </div>
+    
+
+    <script>
+
+        const brenviar = document.getElementById("bt_enviar");
+        const divrespu = document.getElementById("respuesta");
+
+        brenviar.addEventListener("click", prueba);
+
+        function prueba(e){
+            e.preventDefault();
+
+            console.log(document.getElementById('superhero').value);
+
+            fetch("https://www.superheroapi.com/api.php/645665809279716/"+document.getElementById('superhero').value)
+                .then( function(response){
+                    return  response.json();
+                  
+                }).then(function(data){
+                    console.log(data);
+
+                    var respu = '';
+            
+                    divrespu.innerHTML= "<p>Nombre: "+ data.name +"</p><p>Ocupación: "+ data.work.occupation +"</p><p>Genero: "+ data.appearance.gender +"</p><p>Raza: "+ data.appearance.race +"</p><img src='"+ data.image.url +"' width='400px' height='350px' class='alcentro'></img>";
+
+                }).catch(function(error){
+
+                    alert("El código ingresado No existe o "+ error);
+                    
+                });
+
+                
+            
+        }
+
+        
+    
+    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

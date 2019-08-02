@@ -1,0 +1,22 @@
+h1{
+    background: #F5C2C1;
+    color: purple;
+    text-align: center;
+    padding: 0.7em 0em;
+}
+
+p{
+    text-align: center;
+}
+
+.alcentro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#respuesta{
+    background: #F7F6DB;
+    border: 1px solid #86A9C2;
+}
